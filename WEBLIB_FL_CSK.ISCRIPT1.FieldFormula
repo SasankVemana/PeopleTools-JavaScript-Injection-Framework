@@ -1,0 +1,8 @@
+Function IScript_CSK_GET_IMG
+   
+   Local string &img = %Request.GetParameter("img");
+   
+   &url = %Response.GetImageURL(@("Image." | &img));
+   %Response.RedirectURL(&url);
+   
+End-Function;
