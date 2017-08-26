@@ -9,6 +9,8 @@ JavaScript Injection Framework:
 - CSK_FL_BOOTSTRAP_JS is a javascript that contains several helper functions, includes CSK_INJECT_JS (serves as the configuration for adding javascripts), loads RequireJS (and it's configuration) and invokes a function in CSK_INJECT_JS as callback.
 - CSK_INJECT_JS serves as an abstracted configuration script which we can use to load other custom javascript objects as per our requirements.
 
-Useful Links:
-https://pe0ples0ft.blogspot.com/2016/06/peopletools-855-using-oracle-jet-jquery.html
+Additional Notes:
+- Custom IScript for IScript_CSK_GET_IMG function is also provided in this project.
 
+For More Details:
+https://pe0ples0ft.blogspot.com/2016/06/peopletools-855-using-oracle-jet-jquery.html
