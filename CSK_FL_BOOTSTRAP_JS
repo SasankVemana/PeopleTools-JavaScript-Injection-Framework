@@ -1,0 +1,123 @@
+var getScriptUrl = function (scriptId) {	
+  /*** Function Credit: Jim Marion
+  * Resource: http://jjmpsj.blogspot.com/2015/02/using-requirejs-to-manage-dependencies.html
+  * Build a URL based on the current component's URL
+  * @param {type} scriptId* @returns {String} derived URL for JavaScript
+  */
+	var mainUrl = window.location.href;	
+	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswq]\//);	
+	return window.location.origin + "/psc/" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/s/WEBLIB_PTBR.ISCRIPT1.FieldFormula.IScript_GET_JS?ID=" + scriptId;
+};
+
+var getImageUrl = function (imageId) {	
+	var mainUrl = window.location.href;	
+	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswq]\//);	
+	return window.location.origin + "/psc/" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/s/WEBLIB_FL_CSK.ISCRIPT1.FieldFormula.IScript_CSK_GET_IMG?img=" + imageId;
+};
+
+var getCSSUrl = function (cssId) {	
+	var mainUrl = window.location.href;	
+	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswq]\//);	
+	return window.location.origin + "/psc/" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/s/WEBLIB_PTBR.ISCRIPT1.FieldFormula.IScript_GET_CSS?ID=" + cssId;
+};
+
+var cskLoadCSS = function (path) {   
+	var oHead= document.getElementsByTagName('head')[0];    
+	var oStyle= document.createElement('link');	
+	oStyle.type='text/css';
+	oStyle.rel="stylesheet";
+	oStyle.href=path;
+	oHead.appendChild(oStyle);
+};
+
+var cskLoadJS = function(sURL, sId, callback) {	
+
+  /*** Improvised from delivered JavaScript: PT_CHART_LOAD - loadScript Function
+  * Load JavaScript to Document* @param {type} sURL
+  * @param {type} sId
+  * @param {type} callback
+  */
+  
+	var oElement= document.getElementsByTagName('head')[0];	
+	var oScript= document.createElement('script');	
+	oScript.type= 'text/javascript';	
+	oScript.language='JavaScript';	
+
+	//% console.log('cskLoadJS: ' + sId); 	
+	
+	if(oScript.readyState)	{		
+		oScript.onreadystatechange=function()  //for IE		
+		{			
+			if(oScript.readyState=="loaded"||oScript.readyState=="complete")			
+			{				
+				oScript.onreadystatechange=null;
+			}	    
+		};	
+	}	else	{   
+		oScript.onload=function()		
+		{
+			//% console.log('	' + sId + 'onload callback: ' + callback); 
+		    if (typeof(callback) === 'function')
+		    {
+	    	    callback(callback);
+	    	}			
+			
+		};	
+	}	
+	
+	oScript.src= sURL;	
+	oScript.id= sId;    
+	oElement.appendChild(oScript);    
+};
+
+var cskGetFormName = function()
+{
+  var URI = location.href;  
+
+  //% Get the base url and site name
+  var baseUri = URI.replace("/psp/", "/psc/");
+  var serverUri = baseUri.split("/psc/")[0];
+  baseUri = serverUri + baseUri.match(/\/ps(c|p)\/([^\/]*)?\/?([^\/]*)?\/?([^\/]*)?\//)[0];
+  var psSiteName = (URI.split("/"))[4];
+
+  var cskFormCounter = "0";
+
+  if(psSiteName.indexOf("_") != -1) 
+  {
+    var lIndex = psSiteName.lastIndexOf("_");
+    var lastStr = psSiteName.substr(lIndex+1);
+    
+   if(typeof(lastStr) != 'undefined' && lastStr != "" && !isNaN(lastStr))
+   {
+      cskFormCounter = psSiteName.substr(lIndex+1, lIndex+1);
+   }
+  }
+  return "win" + cskFormCounter;
+};
+
+%include(CSK_INJECT_JS);
+
+/* Main Function that gets invoked immediately */
+(function () {	    
+
+	/* Load requireJS from Oracle JET directory */	
+	var wsPath = '/cs/' + getSiteName();        
+	//% console.log('CSK_BOOTSTRAP_JS: ' + wsPath);  	
+
+
+	/* Exit Function if rendering Query */	  	
+	if(location.href.indexOf("/q/") != -1) 
+	{
+		return;
+	}
+
+  /* Load require.js */
+	cskLoadJS(wsPath + '/oraclejet/js/libs/require/require.js', 'CSK_REQUIRE_JS', 'sCntr');      
+
+  /* 
+	* Load custom require.js configuration and pass cskInjectJS as the callback function.
+	* This will ensure that cskInjectJS will only get invoked after CSK_REQUIRE_CFG_JS is loaded.
+	*/
+    cskLoadJS(getScriptUrl('CSK_REQUIRE_CFG_JS'), 'CSK_REQUIRE_CFG_JS', cskInjectJS);
+
+}());
