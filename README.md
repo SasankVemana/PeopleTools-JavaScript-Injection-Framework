@@ -17,5 +17,4 @@ For More Details:
 https://pe0ples0ft.blogspot.com/2016/06/peopletools-855-using-oracle-jet-jquery.html
 
 Troubleshooting Tips:
-- If you run into issues with loading of Oracle JET - javascript libraries, then check the web server to see if the version number is accurate. For example, PeopleTools 8.56 uses Oracle JET version 2.1.0. This means that the jQuery version available will be 3.1.0. Therefore, we must use the appropriate path.
-Here is sample of CSK_REQUIRE_CFG_JS with appropriate path for jQuery: https://gist.github.com/SasankVemana/83cc903f1eee08c7f8aab8911ec511ee
+- If you run into issues with loading of Oracle JET - javascript libraries, then check the web server to see if the version number in the library path is accurate. For example, PeopleTools 8.56 uses Oracle JET version 2.1.0. This means that the jQuery version available will be 3.1.0. If we are referencing older versions of jQuery which no longer exist in Oracle JET, then we need to update the path to point to the 3.1.0 version. Here is sample of CSK_REQUIRE_CFG_JS with appropriate path for jQuery: https://gist.github.com/SasankVemana/83cc903f1eee08c7f8aab8911ec511ee
