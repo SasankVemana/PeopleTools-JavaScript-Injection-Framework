@@ -11,6 +11,7 @@ JavaScript Injection Framework:
 
 Additional Notes:
 - Custom IScript for IScript_CSK_GET_IMG function is also provided in this project.
+- CSK_JQUERY_1_7_2_JS is a custom HTML object with contents of jQuery 1.7.2.
 
 For More Details:
 https://pe0ples0ft.blogspot.com/2016/06/peopletools-855-using-oracle-jet-jquery.html
