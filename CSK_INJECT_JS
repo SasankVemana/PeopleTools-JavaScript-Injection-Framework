@@ -1,0 +1,40 @@
+/* Inject custom javascripts */
+var cskInjectJS = function() {
+
+    /*
+     * Inject custom JS using getScriptUrl and cskLoadJS functions as follows:		
+     * cskLoadJS(getScriptUrl('CSK_FL_TEST_JS'), 'CSK_FL_TEST_JS', callbackFunction);     		
+     * cskLoadJS(getScriptUrl('CSK_FL_TEST_JS'), 'CSK_FL_TEST_JS', 'sCntr');     		
+     */
+
+    // The below list if JS files are injected as examples. This can vary depending on your requirements;
+    // Branding JS;
+    cskLoadJS(getScriptUrl('CSK_ANALYTICS_JS'));
+    cskLoadJS(getScriptUrl('CSK_FL_DBNAME_JS'), 'CSK_FL_DBNAME_JS', 'sCntr');
+    cskLoadJS(getScriptUrl('CSK_OVERRIDE_IMAGE_JS'), 'CSK_OVERRIDE_IMAGE_JS', 'sCntr');
+
+    if (isFModeLayout()) {
+        cskLoadJS(getScriptUrl('CSK_FL_CTRL_J_JS'), 'CSK_FL_CTRL_J_JS', 'sCntr');
+    }
+
+    // Only Load JS if the current page is PTNUI_NAVBAR	
+    if (document.querySelector("[page='PTNUI_NAVBAR']") !== null) {
+        // Only Load JS if NOT Small Form Factor (SFF)		
+        if (document.querySelector('html').getAttribute('class').indexOf('psc_form-small') < 0) {
+            cskLoadJS(getScriptUrl('CSK_NB_INIT_JS'), 'CSK_NB_INIT_JS', 'sCntr');
+        }
+    }
+
+    // oj Samples;
+    if (document.querySelector("[page='CSK_OJ_LAYOUT']") !== null) {
+        cskLoadJS(getScriptUrl('CSK_OJ_LOAD_CSS'), 'CSK_OJ_LOAD_CSS', 'sCntr');
+    }
+    if (document.querySelector("[page='CSK_KO_DATA_BIND']") !== null) {
+        cskLoadJS(getScriptUrl('CSK_KO_MAIN_JS'), 'CSK_KO_MAIN_JS', 'sCntr');
+
+    }
+    if (document.querySelector("[page='CSK_OJ_GAUGE_DEMO']") !== null) {
+        cskLoadJS(getScriptUrl('CSK_OJ_GAUGE_MAIN_JS'), 'CSK_OJ_GAUGE_MAIN_JS', 'sCntr');
+    }
+
+};
