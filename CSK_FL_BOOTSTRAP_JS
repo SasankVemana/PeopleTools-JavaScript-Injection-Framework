@@ -104,20 +104,13 @@ var cskGetFormName = function()
 	var wsPath = '/cs/' + getSiteName();        
 	//% console.log('CSK_BOOTSTRAP_JS: ' + wsPath);  	
 
-
-	/* Exit Function if rendering Query */	  	
-	if(location.href.indexOf("/q/") != -1) 
-	{
-		return;
-	}
-
-  /* Load require.js */
+	/* Load require.js */
 	cskLoadJS(wsPath + '/oraclejet/js/libs/require/require.js', 'CSK_REQUIRE_JS', 'sCntr');      
 
-  /* 
+	/* 
 	* Load custom require.js configuration and pass cskInjectJS as the callback function.
 	* This will ensure that cskInjectJS will only get invoked after CSK_REQUIRE_CFG_JS is loaded.
 	*/
-    cskLoadJS(getScriptUrl('CSK_REQUIRE_CFG_JS'), 'CSK_REQUIRE_CFG_JS', cskInjectJS);
+	cskLoadJS(getScriptUrl('CSK_REQUIRE_CFG_JS'), 'CSK_REQUIRE_CFG_JS', cskInjectJS);
 
 }());
