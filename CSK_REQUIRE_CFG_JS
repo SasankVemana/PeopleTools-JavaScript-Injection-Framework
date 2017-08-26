@@ -25,7 +25,7 @@ requirejs.config({
 		'promise':cskBowerCompsPath+'/es6-promise/promise.min',
 		'ojdnd':cskBowerCompsPath+'/oraclejet/dist/js/libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
 		'jqueryui-amd':cskBowerCompsPath+'/jquery-ui/ui/minified',
-    'signals':cskBowerCompsPath+'/js-signals/dist/signals.min'
+    		'signals':cskBowerCompsPath+'/js-signals/dist/signals.min'
 	},
 	map: {
 		// '*' means all modules will get 'jquery-private'
@@ -38,10 +38,10 @@ requirejs.config({
 		// be an unresolvable cyclic dependency.
 		'jquery-private': { 'jquery': 'jquery' }
 	},
-    //% Shim configurations
-    shim: {
-        'jqueryui': {
-            deps: ['jquery', 'jquery_1_7_2']
-        }
-    }
+    	//% Shim configurations
+    	shim: {
+        	'jqueryui': {
+            		deps: ['jquery', 'jquery_1_7_2']
+        	}
+    	}
 });
