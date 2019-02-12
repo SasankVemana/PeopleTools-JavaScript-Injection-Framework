@@ -12,20 +12,14 @@ requirejs.config({
 		/* Using non-standard name because 1.6.2 is not AMD compliant whereas
 		* later versions are compliant. Don't want conflict with later version
 		*/
-		'jquery':cskWsPath+'jquery/jquery-2.1.3.min',
+
+        	// 8.57;
+		'jquery':cskWsPath+'jquery/jquery-3.1.1.min',
+        	/* 8.56: 'jquery':cskWsPath+'jquery/jquery-3.1.0.min', */
+        	/* 8.55: 'jquery':cskWsPath+'jquery/jquery-2.1.3.min', */
 		'jquery_1_7_2':getScriptUrl('CSK_JQUERY_1_7_2_JS'),
 		'jqueryui':getScriptUrl('PT_JQUERY_UI_1_X_JS'),
-		'jquery-private':getScriptUrl('CSK_JQUERY_PRIVATE_JS'),
-
-		/* Oracle JET (Optional) */
-		'knockout': cskBowerCompsPath+'/knockout/dist/knockout',
-		'ojs':cskBowerCompsPath+'/oraclejet/dist/js/libs/oj/debug',
-		'ojL10n':cskBowerCompsPath+'/oraclejet/dist/js/libs/oj/ojL10n',
-		'ojtranslations':cskBowerCompsPath+'/oraclejet/dist/js/libs/oj/resources',
-		'promise':cskBowerCompsPath+'/es6-promise/promise.min',
-		'ojdnd':cskBowerCompsPath+'/oraclejet/dist/js/libs/dnd-polyfill/dnd-polyfill-1.0.0.min',
-		'jqueryui-amd':cskBowerCompsPath+'/jquery-ui/ui/minified',
-    		'signals':cskBowerCompsPath+'/js-signals/dist/signals.min'
+		'jquery-private':getScriptUrl('CSK_JQUERY_PRIVATE_JS')
 	},
 	map: {
 		// '*' means all modules will get 'jquery-private'
