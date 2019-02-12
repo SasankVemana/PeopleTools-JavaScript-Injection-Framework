@@ -5,19 +5,19 @@ var getScriptUrl = function (scriptId) {
   * @param {type} scriptId* @returns {String} derived URL for JavaScript
   */
 	var mainUrl = window.location.href;	
-	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswq]\//);	
+	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswqe]\//);	
 	return window.location.origin + "/psc/" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/s/WEBLIB_PTBR.ISCRIPT1.FieldFormula.IScript_GET_JS?ID=" + scriptId;
 };
 
 var getImageUrl = function (imageId) {	
 	var mainUrl = window.location.href;	
-	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswq]\//);	
+	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswqe]\//);	
 	return window.location.origin + "/psc/" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/s/WEBLIB_FL_CSK.ISCRIPT1.FieldFormula.IScript_CSK_GET_IMG?img=" + imageId;
 };
 
 var getCSSUrl = function (cssId) {	
 	var mainUrl = window.location.href;	
-	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswq]\//);	
+	var parts = mainUrl.match(/ps[pc]\/(.+?)(?:_\d)*?\/(.+?)\/(.+?)\/[chswqe]\//);	
 	return window.location.origin + "/psc/" + parts[1] + "/" + parts[2] + "/" + parts[3] + "/s/WEBLIB_PTBR.ISCRIPT1.FieldFormula.IScript_GET_CSS?ID=" + cssId;
 };
 
@@ -44,6 +44,10 @@ var cskLoadJS = function(sURL, sId, callback) {
 	oScript.language='JavaScript';	
 
 	//% console.log('cskLoadJS: ' + sId); 	
+
+	oScript.src= sURL;	
+	oScript.id= sId;    
+	oElement.appendChild(oScript);    
 	
 	if(oScript.readyState)	{		
 		oScript.onreadystatechange=function()  //for IE		
@@ -65,9 +69,6 @@ var cskLoadJS = function(sURL, sId, callback) {
 		};	
 	}	
 	
-	oScript.src= sURL;	
-	oScript.id= sId;    
-	oElement.appendChild(oScript);    
 };
 
 var cskGetFormName = function()
@@ -97,6 +98,15 @@ var cskGetFormName = function()
 
 %include(CSK_INJECT_JS);
 
+var requireCallBack = function()
+{
+	/* 
+	* Load custom require.js configuration and pass cskInjectJS as the callback function.
+	* This will ensure that cskInjectJS will only get invoked after CSK_REQUIRE_CFG_JS is loaded.
+	*/
+    cskLoadJS(getScriptUrl('CSK_REQUIRE_CFG_JS'), 'CSK_REQUIRE_CFG_JS', cskInjectJS);
+};
+
 /* Main Function that gets invoked immediately */
 (function () {	    
 
@@ -105,12 +115,6 @@ var cskGetFormName = function()
 	//% console.log('CSK_BOOTSTRAP_JS: ' + wsPath);  	
 
 	/* Load require.js */
-	cskLoadJS(wsPath + '/oraclejet/js/libs/require/require.js', 'CSK_REQUIRE_JS', 'sCntr');      
-
-	/* 
-	* Load custom require.js configuration and pass cskInjectJS as the callback function.
-	* This will ensure that cskInjectJS will only get invoked after CSK_REQUIRE_CFG_JS is loaded.
-	*/
-	cskLoadJS(getScriptUrl('CSK_REQUIRE_CFG_JS'), 'CSK_REQUIRE_CFG_JS', cskInjectJS);
+	cskLoadJS(wsPath + '/oraclejet/js/libs/require/require.js', 'CSK_REQUIRE_JS', requireCallBack);      
 
 }());
