@@ -3,6 +3,9 @@ JavaScript Injection Framework for PeopleTools 8.55+ using Oracle JET (requireJS
 
 https://pe0ples0ft.blogspot.com/p/javascript-injection-framework.html
 
+Documentation on Updates, Bugs and Fixes:
+https://pe0ples0ft.blogspot.com/2019/03/javascript-injection-framework-updates.html
+
 JavaScript Injection Framework:
 - Add one line customization to PT_UTIL (at the very end) which helps with injecting our framework (via CSK_FL_BOOTSTRAP_JS) to all pages across the application.
 %include(CSK_FL_BOOTSTRAP_JS);
