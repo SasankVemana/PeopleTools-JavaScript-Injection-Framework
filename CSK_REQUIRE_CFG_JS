@@ -13,8 +13,9 @@ requirejs.config({
 		* later versions are compliant. Don't want conflict with later version
 		*/
 
-        	// 8.57;
-		'jquery':cskWsPath+'jquery/jquery-3.1.1.min',
+        	// 8.58;
+		'jquery':cskWsPath+'jquery/jquery-3.4.1.min',
+		/* 8.57: 'jquery':cskWsPath+'jquery/jquery-3.1.1.min', */ 
         	/* 8.56: 'jquery':cskWsPath+'jquery/jquery-3.1.0.min', */
         	/* 8.55: 'jquery':cskWsPath+'jquery/jquery-2.1.3.min', */
 		'jquery_1_7_2':getScriptUrl('CSK_JQUERY_1_7_2_JS'),
